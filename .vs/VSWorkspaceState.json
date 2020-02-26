@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\GuessMyWord",
+    "\\GuessTheWord"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\GuessMyWord\\GuessMyWord.sln",
   "PreviewInSolutionExplorer": false
 }

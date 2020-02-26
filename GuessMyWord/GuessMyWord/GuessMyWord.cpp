@@ -13,7 +13,7 @@ int main()
     bool wrongEnter = false;
     bool wordFind = true;
     bool charFind = true;
-    string tabWords[10] = { "ciel", "maison", "port", "tortue", "eclipse", "lion", "rouge", "vitesse", "poisson", "language" };
+    string tabWords[14] = { "ciel", "maison", "port", "tortue", "eclipse", "lion", "rouge", "vitesse", "poisson", "language", "wu", "ne", "ma", "je"};
     string wordToGuess = "ciel";
     string alphabet_min = "abcdefghijklmnopqrstuvwxyz";
     char userCharEnter;
@@ -23,16 +23,36 @@ int main()
         //initialisation
 
         //ajouter le choix du nombre de lettre du mot à deviner
+        //en fonction du nombre de lettre du mot, proposer de choisir le nombre de lettre à trouver
+
+
 
         srand(time(NULL));
         int randomNumber = rand() % tabWords->length();
+        int numberLife = 5;
         wordToGuess = tabWords[randomNumber];
         string wordCurrent = wordToGuess;
         wordCurrent.assign(wordCurrent.length(), '_');
         wordFind = true;
         charFind = true;
+        int numberLetterToGuess = 0;
+        int numberLetter = wordToGuess.length();
 
-        while (wordFind)
+        //combien de lettre l'utilsateur veut deviner
+
+        /*do
+        {
+            cout << "Combien de lettre voulez vous deviner ? choississez entre 1 et " << numberLetter << endl;
+            cin >> numberLetterToGuess;
+
+        } while ( !(numberLetterToGuess > 0 && numberLetterToGuess <= numberLetter) );*/
+       
+        //Générer le mot à deviner avec le nombre de lettre à deviner que l'utilisateur à choisi
+
+        cout << "Debut de partie" << endl << endl;
+
+
+        while (wordFind && numberLife != 0)
         {
 
             cout << "MOT A DEVINER  " << wordCurrent <<endl << endl;
@@ -59,6 +79,7 @@ int main()
 
             //boucle tant que je trouve une valeur je continue de tourner
             int charFindIndex = 0;
+            charFind = true;
             do
             {
                 charFindIndex = wordToGuess.find(userCharEnter, charFindIndex);
@@ -76,11 +97,31 @@ int main()
 
             } while (charFind);
 
+            //vérifier si le mot mystère est trouvé
+            if (wordCurrent._Equal(wordToGuess))
+            {
+                wordFind = false;
+            }
 
-
-            //if (wordToGuess.find(userCharEnter) != std::string::npos)
+            numberLife--;
         }
 
+        cout << endl << endl;
+
+        if (wordFind)
+        {
+            cout << "OH NooooooooN vous n'avez réussi a trouver le mot mystere :'(" << endl << endl;
+        }
+        else
+        {
+            cout << "BRAVO !!!!! Vous avez trouver le mot mystere " << wordToGuess << " en " << 5 - numberLife << " essai";
+            if((5 - numberLife) != 1)
+            {
+                cout << "s";
+            }
+            cout << endl << endl;
+        }
+        
         // fin de partie
         // demande à l'utilisateur de recommencer une nouvelle partie ou non
         wrongEnter = false;
@@ -98,12 +139,13 @@ int main()
             }
             cin >> userCharEnter;
 
-        } while ( (userCharEnter != 'o') || (userCharEnter != 'n') );
+        } while ( (userCharEnter != 'o') && (userCharEnter != 'n') );
+
+        cout << endl << endl;
 
         if (userCharEnter == 'o')
         {
-            cout << "OK. Bonne chance pour cette nouvelle partie" << endl;
-
+            cout << "OK. Bonne chance pour cette nouvelle partie ;)" << endl;
         }
         else
         {
